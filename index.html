@@ -30,13 +30,27 @@
                                 <div class="form-group row">
                                     <label for="dWidth" class="col-sm-4 col-form-label">Width</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="dWidth" id="dWidth" class="form-control" placeholder="feet/inches" />
+                                        <select name="dWidth" id="dWidth"class="form-control">
+                                            <option value="">Select width</option>
+                                            <option value="2.0">2&prime;</option>
+                                            <option value="2.4">2&prime;4&Prime;</option>
+                                            <option value="2.8">2&prime;8&Prime;</option>
+                                            <option value="2.10">2&prime;10&Prime;</option>
+                                            <option value="3.0">3&prime;</option>
+                                            <option value="3.6">3&prime;6&Prime;</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="dHeight" class="col-sm-4 col-form-label">Height</label>
                                     <div class="col-sm-8">
-                                        <input type="text" name="dHeight" id="dHeight" class="form-control" placeholder="feet/inches" />
+                                        <select name="dHeight" id="dHeight"class="form-control">
+                                            <option value="">Select height</option>
+                                            <option value="6.6">6&prime;6&Prime;</option>
+                                            <option value="6.8">6&prime;8&Prime;</option>
+                                            <option value="7.0">7&prime;</option>
+                                            <option value="8.0">8&prime;</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +79,7 @@
                             <div class="inputsContainer">
                                 <div id="SurfaceVerticalRodInputs" class="hide inputs-container">
                                     <div class="form-group row">
-                                        <label for="surfaceVertBGap" class="col-sm-4 col-form-label">Bottom gap: </label>
+                                        <label for="surfaceVertBGap" class="col-sm-4 col-form-label">Bottom gap</label>
                                         <div class="col-sm-8">
                                             <select name="surface-vert-b-gap" id="surfaceVertBGap" class="form-control">
                                                 <option value="32">32&Prime;</option>
@@ -75,7 +89,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="surfaceVertLGap" class="col-sm-4 col-form-label">Left gap: </label>
+                                        <label for="surfaceVertLGap" class="col-sm-4 col-form-label">Left gap</label>
                                         <div class="col-sm-8">
                                             <select name="surface-vert-l-gap" id="surfaceVertLGap" class="form-control">
                                                 <option value=".5">0.5&Prime;</option>
@@ -85,7 +99,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="surfaceVertRGap" class="col-sm-4 col-form-label">Right gap: </label>
+                                        <label for="surfaceVertRGap" class="col-sm-4 col-form-label">Right gap</label>
                                         <div class="col-sm-8">
                                             <select name="surface-vert-r-gap" id="surfaceVertRGap" class="form-control">
                                                 <option value=".5">0.5&Prime;</option>
@@ -97,15 +111,23 @@
                                 </div>
                                 <div id="AuxiliaryLockInputs" class="hide inputs-container">
                                     <div class="form-group row">
-                                        <label for="tPos" class="col-sm-4 col-form-label">Top: </label>
+                                        <label for="auxLGap" class="col-sm-4 col-form-label">Left gap</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="tPos" id="tPos" class="form-control" placeholder="top position in inches" />
+                                            <select name="auxLGap" id="auxLGap" class="form-control">
+                                                <option value=".5">0.5&Prime;</option>
+                                                <option value="1">1.0&Prime;</option>
+                                                <option value="1.5">1.5&Prime;</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="lPos" class="col-sm-4 col-form-label">Left: </label>
+                                        <label for="auxBGap" class="col-sm-4 col-form-label">Bottom gap</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="lPos" id="lPos" class="form-control" placeholder="left position in inches" />
+                                            <select name="auxBGap" id="auxBGap" class="form-control">
+                                                <option value="32">32&Prime;</option>
+                                                <option value="34">34&Prime;</option>
+                                                <option value="36">36&Prime;</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -116,7 +138,7 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                                 <div class="col-sm-4">
-                                    <button class="btn btn-primary" id="resetShapes">Reset</button>
+                                    <button class="btn btn-primary" id="resetForm">Reset</button>
                                 </div>
                             </div>
                         </form>
@@ -129,6 +151,8 @@
             </div>
         </div>
         <script src="./js/two.min.js"></script>
+        <script src="./xml.js"></script>
+        <script src="./js/utils.js"></script>
         <script src="./js/source.js"></script>
         <script src="./js/DOT.xml" type="text/xml"></script>
     </body>
