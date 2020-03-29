@@ -780,7 +780,10 @@ let DrawAuxiliaryLock = () => {
   const bCircle = two.makeCircle(lGap, tGap, bRadius);
   const sCircle = two.makeCircle(lGap, tGap, sRadius);
 
-  let auxLockInstance = two.makeGroup(bCircle, sCircle);
+  const keyHole = two.makeRoundedRectangle(lGap, tGap + (sRadius * 0.3), bRadius * 0.2, bRadius * 0.4, 2);
+  keyHole.fill = 'grey';
+
+  let auxLockInstance = two.makeGroup(bCircle, sCircle, keyHole);
 
   two.update();
 };
@@ -789,9 +792,9 @@ let SurfaceVerticalRod = () => {
   const {width: doorWidth, height: doorHeight} = doorArea;
   const {rimExitDevice, wingX2, wingWidth, wingY2, wingY4, exitDeviceWidth} = drawRImExitDevice();
   // draw upper rod with hatch
-  const {uRodGrp, uRodX1, uRodX3, supWidth, supHeight, supX} = drawUpperRod({wingX2, wingWidth, wingY2, exitDeviceWidth, doorWidth});
+  const {uRodGrp, uRodX1, uRodX3, supWidth, supHeight, supX, supY} = drawUpperRod({wingX2, wingWidth, wingY2, exitDeviceWidth, doorWidth});
   // draw lower rod with hatch
-  const {lRodGrp} = drawLowerRod({ uRodX1, uRodX3, wingY4, doorHeight, supWidth, supHeight, supX });
+  const {lRodGrp} = drawLowerRod({ uRodX1, uRodX3, wingY4, doorHeight, supWidth, supHeight, supX, supY });
 
   const surfaceVertRod = two.makeGroup(rimExitDevice, uRodGrp, lRodGrp);
 

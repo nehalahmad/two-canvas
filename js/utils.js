@@ -94,7 +94,7 @@ function drawUpperRod({
 
   const upperRod = two.makePath(x1, y1, x2, y2, x3, y3, x4, y4, true);
 
-  const { upperBarSup, supWidth, supHeight, supX } = drawUpperBarSup({
+  const { upperBarSup, supWidth, supHeight, supX, supY } = drawUpperBarSup({
     uRodX1: x1,
     uRodWidth: (exitDeviceWidth * 3.01) / 100,
     uRodHeight: y4 - y3,
@@ -105,7 +105,7 @@ function drawUpperRod({
 
   two.update();
 
-  return { uRodGrp, uRodX1: x1, uRodX3: x3, supWidth, supHeight, supX };
+  return { uRodGrp, uRodX1: x1, uRodX3: x3, supWidth, supHeight, supX, supY };
 }
 
 // x2, y2, x3 are points of right base (path)
@@ -118,9 +118,8 @@ function drawUpperBarSup({ uRodX1, uRodWidth, uRodHeight, doorWidth }) {
 
   let widthDiff = w + x - doorWidth;
   if (widthDiff > 0) {
-    w -= widthDiff / 2;
-    h -= widthDiff / 2;
-    y -= widthDiff / 2;
+    w = w - widthDiff * 0.8;
+    h = h - widthDiff * 0.8;
   }
 
   const radius = Math.round(w * 0.2);
@@ -129,7 +128,7 @@ function drawUpperBarSup({ uRodX1, uRodWidth, uRodHeight, doorWidth }) {
 
   two.update();
 
-  return { upperBarSup, supWidth: w, supHeight: h, supX: x };
+  return { upperBarSup, supWidth: w, supHeight: h, supX: x, supY: y };
 }
 
 function drawLowerRod({
@@ -139,7 +138,8 @@ function drawLowerRod({
   doorHeight,
   supWidth,
   supHeight,
-  supX
+  supX,
+  supY
 }) {
   const x1 = uRodX1;
   const y1 = wingY4;
@@ -159,7 +159,8 @@ function drawLowerRod({
     supWidth,
     supHeight,
     supX,
-    doorHeight
+    doorHeight,
+    supY
   });
 
   const lRodGrp = two.makeGroup(lowerRod, lowerBarSup);
@@ -169,12 +170,12 @@ function drawLowerRod({
   return { lRodGrp };
 }
 
-function drawLowerBarSup({ supWidth, supHeight, supX, doorHeight }) {
+function drawLowerBarSup({ supWidth, supHeight, supX, doorHeight, supY }) {
   let w = supWidth;
   let x = supX;
 
   let h = supHeight;
-  let y = Math.round(doorHeight - (2 * 10 + h / 2)); // top border will be 2" below from the rod's upper border
+  let y = Math.round(doorHeight - supY); // top border will be 2" below from the rod's upper border
 
   const radius = Math.round(w * 0.2);
 
