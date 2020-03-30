@@ -1,3 +1,7 @@
+/* start - auxiliary lock intance */
+const AUXLOCKRADIUS = 5 * 10; // 2"
+/* end - auxiliary lock intance */
+
 function convertFeetInchesIntoPix(dim) {
   if (dim.indexOf(".")) {
     const values = dim.split(".");
@@ -114,13 +118,13 @@ function drawUpperBarSup({ uRodX1, uRodWidth, uRodHeight, doorWidth }) {
   let x = Math.round(uRodX1 + uRodWidth / 2);
 
   let h = Math.round(uRodHeight * 0.2131);
-  let y = Math.round(2 * 10 + h / 2); // top border will be 2" below from the rod's upper border
 
   let widthDiff = w + x - doorWidth;
   if (widthDiff > 0) {
     w = w - widthDiff * 0.8;
     h = h - widthDiff * 0.8;
   }
+  let y = Math.round(2 * 10 + h / 2); // top border will be 2" below from the rod's upper border
 
   const radius = Math.round(w * 0.2);
 
@@ -184,4 +188,92 @@ function drawLowerBarSup({ supWidth, supHeight, supX, doorHeight, supY }) {
   two.update();
 
   return lowerBarSup;
+}
+
+function drawAuxiliaryLock({ doorWidth, doorHeight }) {
+  let { auxBGap: bGap, auxRGap: rGap } = document.forms.hw;
+
+  const bRadius = Math.round(AUXLOCKRADIUS * (doorWidth / doorHeight));
+
+  rGap = convertInchesIntoPix(rGap.value);
+  bGap = convertInchesIntoPix(bGap.value);
+
+  rGap = doorWidth - rGap - bRadius; // right gap will be door width - right margin - big radius
+  // since, canvas is 2D
+  // bottom gap will be consider as top gap where top gap = doorHeight - bGap;
+  const tGap = doorHeight - bGap;
+
+  const bCircle = two.makeCircle(rGap, tGap, bRadius);
+
+  const sRadius = Math.round(bRadius / 4);
+  const sCircle = two.makeCircle(rGap, tGap, sRadius);
+
+  const keyHole = two.makeRoundedRectangle(
+    rGap,
+    tGap + sRadius * 0.3,
+    bRadius * 0.2,
+    bRadius * 0.4,
+    2
+  );
+  keyHole.fill = "grey";
+
+  let auxLockInstance = two.makeGroup(bCircle, sCircle, keyHole);
+
+  two.update();
+
+  return auxLockInstance;
+}
+
+function drawMortiseBaseBar({ baseWidth, baseHeight, doorWidth, tGap, rGap }) {
+  const baseRadius = Math.round(baseWidth * 0.2162);
+  const baseX = doorWidth - rGap - baseWidth / 2;
+  const baseY = tGap + baseHeight / 2;
+  const baseBar = two.makeRoundedRectangle(
+    baseX,
+    baseY,
+    baseWidth,
+    baseHeight,
+    baseRadius
+  );
+  two.update();
+
+  return { baseBar, baseX, baseY };
+}
+
+function drawMortiseCircles({ baseX, baseY, baseWidth, baseHeight }) {
+  const baseBarTEdge = baseY - baseHeight / 2;
+  const smCircleX = baseX;
+  const smCircleY = Math.round(baseBarTEdge + baseWidth * 0.3918);
+  const smCircleRadius = Math.round(baseWidth * 0.2297);
+  const smCircle = two.makeCircle(smCircleX, smCircleY, smCircleRadius);
+
+  const lgCircleY = baseY + baseHeight / 2 - baseWidth * 0.4932;
+  const lgCircleX = baseX;
+  const lgCircleRadius = Math.round(baseWidth * 0.3581);
+  const lgCircle = two.makeCircle(lgCircleX, lgCircleY, lgCircleRadius);
+
+  const mCircles = two.makeGroup(smCircle, lgCircle);
+  two.update();
+
+  return { mCircles, lgCircleY };
+}
+
+function drawMortiseHandle({ lgCircleY, baseWidth, baseX }) {
+  const handleY = lgCircleY;
+  const handleWidth = Math.round(baseWidth * 1.3162);
+  const handleHeight = Math.round(baseWidth * 0.2892);
+  const handleRadius = Math.round(baseWidth * 0.0891);
+  const handleX = Math.round(
+    baseX + baseWidth / 2 - baseWidth * 0.3108 - handleWidth / 2
+  );
+  const handle = two.makeRoundedRectangle(
+    handleX,
+    handleY,
+    handleWidth,
+    handleHeight,
+    handleRadius
+  );
+  two.update();
+
+  return handle;
 }

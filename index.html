@@ -1,159 +1,240 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>:: TWO JS ::</title>
-        <link rel="stylesheet" href="./bootstrap.min.css" />
-        <link rel="stylesheet" href="./main.css">
-    </head>
-    <body>
-        <div id="app">
-            <div class="container-fluid">
-                <div class="row">
-                    <aside class="col-sm-3">
-                        <!-- <img src="./images/RimExitDevice.png" style="display: none;" /> -->
-                        <form onsubmit="return onSubmit(event);" method="get" id="form_id" name="doorLock">
-                            <small class="form-text text-muted"><strong>Note: </strong>All the values are in Feet/Inches</small>
-                            <br />
-                            <div class="form-group row">
-                                <label for="door" class="col-sm-4 col-form-label">Door Face</label>
-                                <div class="col-sm-8">
-                                    <select id="door" name="door-type" class="form-control">
-                                        <option value="">Select door face</option>
-                                        <!-- <option value="E8">E8</option> -->
-                                        <option value="F">F</option>
-                                        <option value="2PA">2PA</option>
-                                        <!-- <option value="loadImage">Load Image</option> -->
-                                    </select>
-                                </div>
-                            </div>
-                            <div id="dimensionBar">
-                                <div class="form-group row">
-                                    <label for="dWidth" class="col-sm-4 col-form-label">Width</label>
-                                    <div class="col-sm-8">
-                                        <select name="dWidth" id="dWidth"class="form-control">
-                                            <option value="">Select width</option>
-                                            <option value="2.0">2&prime;</option>
-                                            <option value="2.4">2&prime;4&Prime;</option>
-                                            <option value="2.8">2&prime;8&Prime;</option>
-                                            <option value="2.10">2&prime;10&Prime;</option>
-                                            <option value="3.0">3&prime;</option>
-                                            <option value="3.6">3&prime;6&Prime;</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="dHeight" class="col-sm-4 col-form-label">Height</label>
-                                    <div class="col-sm-8">
-                                        <select name="dHeight" id="dHeight"class="form-control">
-                                            <option value="">Select height</option>
-                                            <option value="6.6">6&prime;6&Prime;</option>
-                                            <option value="6.8">6&prime;8&Prime;</option>
-                                            <option value="7.0">7&prime;</option>
-                                            <option value="8.0">8&prime;</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-4"></div>
-                                <div class="col-sm-8">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    
-                        <form onsubmit="return addHardware(event);" method="get" id="hardware_id" name="hw">
-                            <div class="form-group row">
-                                <label for="selectHW" class="col-sm-4 col-form-label">Hardware Lock</label>
-                                <div class="col-sm-8">
-                                    <select id="selectHW" class="form-control">
-                                        <option value="">Select Hardware</option>
-                                        <!-- <option value="RimExitDevice">Rim Exit Device</option> -->
-                                        <option value="AuxiliaryLock">Auxiliary Lock</option>
-                                        <option value="SurfaceVerticalRod">Surface Vertical Rod</option>
-                                        <!-- <option value="SurfaceVerticalRodwithLBR">Surface Vertical Rod with LBR</option>
-                                        <option value="ConcealedVerticalRodwithLBR">Concealed Vertical Rod with LBR</option> -->
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="inputsContainer">
-                                <div id="SurfaceVerticalRodInputs" class="hide inputs-container">
-                                    <div class="form-group row">
-                                        <label for="surfaceVertBGap" class="col-sm-4 col-form-label">Bottom gap</label>
-                                        <div class="col-sm-8">
-                                            <select name="surface-vert-b-gap" id="surfaceVertBGap" class="form-control">
-                                                <option value="32">32&Prime;</option>
-                                                <option value="34">34&Prime;</option>
-                                                <option value="36">36&Prime;</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="surfaceVertLGap" class="col-sm-4 col-form-label">Left gap</label>
-                                        <div class="col-sm-8">
-                                            <select name="surface-vert-l-gap" id="surfaceVertLGap" class="form-control">
-                                                <option value=".5">0.5&Prime;</option>
-                                                <option value="1">1.0&Prime;</option>
-                                                <option value="1.5">1.5&Prime;</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="surfaceVertRGap" class="col-sm-4 col-form-label">Right gap</label>
-                                        <div class="col-sm-8">
-                                            <select name="surface-vert-r-gap" id="surfaceVertRGap" class="form-control">
-                                                <option value=".5">0.5&Prime;</option>
-                                                <option value="1">1&Prime;</option>
-                                                <option value="1.5">1.5&Prime;</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="AuxiliaryLockInputs" class="hide inputs-container">
-                                    <div class="form-group row">
-                                        <label for="auxLGap" class="col-sm-4 col-form-label">Left gap</label>
-                                        <div class="col-sm-8">
-                                            <select name="auxLGap" id="auxLGap" class="form-control">
-                                                <option value=".5">0.5&Prime;</option>
-                                                <option value="1">1.0&Prime;</option>
-                                                <option value="1.5">1.5&Prime;</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="auxBGap" class="col-sm-4 col-form-label">Bottom gap</label>
-                                        <div class="col-sm-8">
-                                            <select name="auxBGap" id="auxBGap" class="form-control">
-                                                <option value="32">32&Prime;</option>
-                                                <option value="34">34&Prime;</option>
-                                                <option value="36">36&Prime;</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-4"></div>
-                                <div class="col-sm-4">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                                <div class="col-sm-4">
-                                    <button class="btn btn-primary" id="resetForm">Reset</button>
-                                </div>
-                            </div>
-                        </form>
-                    </aside>
-                    <main class="col-sm-9">
-                        <div id="product"></div>
-                    </main>
+  <head>
+    <title>:: TWO JS ::</title>
+    <link rel="stylesheet" href="./bootstrap.min.css" />
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="container-fluid">
+        <div class="row">
+          <aside class="col-sm-3">
+            <!-- <img src="./images/RimExitDevice.png" style="display: none;" /> -->
+            <form
+              onsubmit="return onSubmit(event);"
+              method="get"
+              id="form_id"
+              name="doorLock"
+            >
+              <small class="form-text text-muted"
+                ><strong>Note: </strong>All the values are in Feet/Inches</small
+              >
+              <br />
+              <div class="form-group row">
+                <label for="door" class="col-sm-4 col-form-label"
+                  >Door Face</label
+                >
+                <div class="col-sm-8">
+                  <select id="door" name="door-type" class="form-control">
+                    <option value="">Select door face</option>
+                    <!-- <option value="E8">E8</option> -->
+                    <option value="F">F</option>
+                    <option value="2PA">2PA</option>
+                    <!-- <option value="loadImage">Load Image</option> -->
+                  </select>
                 </div>
+              </div>
+              <div id="dimensionBar">
+                <div class="form-group row">
+                  <label for="dWidth" class="col-sm-4 col-form-label"
+                    >Width</label
+                  >
+                  <div class="col-sm-8">
+                    <select name="dWidth" id="dWidth" class="form-control">
+                      <option value="">Select width</option>
+                      <option value="2.0">2&prime;</option>
+                      <option value="2.4">2&prime;4&Prime;</option>
+                      <option value="2.8">2&prime;8&Prime;</option>
+                      <option value="2.10">2&prime;10&Prime;</option>
+                      <option value="3.0">3&prime;</option>
+                      <option value="3.6">3&prime;6&Prime;</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="dHeight" class="col-sm-4 col-form-label"
+                    >Height</label
+                  >
+                  <div class="col-sm-8">
+                    <select name="dHeight" id="dHeight" class="form-control">
+                      <option value="">Select height</option>
+                      <option value="6.6">6&prime;6&Prime;</option>
+                      <option value="6.8">6&prime;8&Prime;</option>
+                      <option value="7.0">7&prime;</option>
+                      <option value="8.0">8&prime;</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </form>
 
-            </div>
+            <form
+              onsubmit="return addHardware(event);"
+              method="get"
+              id="hardware_id"
+              name="hw"
+            >
+              <div class="form-group row">
+                <label for="selectHW" class="col-sm-4 col-form-label"
+                  >Hardware Lock</label
+                >
+                <div class="col-sm-8">
+                  <select id="selectHW" class="form-control">
+                    <option value="">Select Hardware</option>
+                    <!-- <option value="RimExitDevice">Rim Exit Device</option> -->
+                    <option value="AuxiliaryLock">Auxiliary Lock</option>
+                    <option value="SurfaceVerticalRod"
+                      >Surface Vertical Rod</option
+                    >
+                    <option value="MortiseLock">Mortise Lock</option>
+                    <!-- <option value="SurfaceVerticalRodwithLBR">Surface Vertical Rod with LBR</option>
+                                        <option value="ConcealedVerticalRodwithLBR">Concealed Vertical Rod with LBR</option> -->
+                  </select>
+                </div>
+              </div>
+              <div class="inputsContainer">
+                <div
+                  id="SurfaceVerticalRodInputs"
+                  class="hide inputs-container"
+                >
+                  <div class="form-group row">
+                    <label for="surfaceVertBGap" class="col-sm-4 col-form-label"
+                      >Bottom gap</label
+                    >
+                    <div class="col-sm-8">
+                      <select
+                        name="surface-vert-b-gap"
+                        id="surfaceVertBGap"
+                        class="form-control"
+                      >
+                        <option value="32">32&Prime;</option>
+                        <option value="34">34&Prime;</option>
+                        <option value="36">36&Prime;</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="surfaceVertLGap" class="col-sm-4 col-form-label"
+                      >Left gap</label
+                    >
+                    <div class="col-sm-8">
+                      <select
+                        name="surface-vert-l-gap"
+                        id="surfaceVertLGap"
+                        class="form-control"
+                      >
+                        <option value=".5">0.5&Prime;</option>
+                        <option value="1">1.0&Prime;</option>
+                        <option value="1.5">1.5&Prime;</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="surfaceVertRGap" class="col-sm-4 col-form-label"
+                      >Right gap</label
+                    >
+                    <div class="col-sm-8">
+                      <select
+                        name="surface-vert-r-gap"
+                        id="surfaceVertRGap"
+                        class="form-control"
+                      >
+                        <option value=".5">0.5&Prime;</option>
+                        <option value="1">1&Prime;</option>
+                        <option value="1.5">1.5&Prime;</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div id="AuxiliaryLockInputs" class="hide inputs-container">
+                  <div class="form-group row">
+                    <label for="auxRGap" class="col-sm-4 col-form-label"
+                      >Right gap</label
+                    >
+                    <div class="col-sm-8">
+                      <select name="auxRGap" id="auxRGap" class="form-control">
+                        <option value=".5">0.5&Prime;</option>
+                        <option value="1">1.0&Prime;</option>
+                        <option value="1.5">1.5&Prime;</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="auxBGap" class="col-sm-4 col-form-label"
+                      >Bottom gap</label
+                    >
+                    <div class="col-sm-8">
+                      <select name="auxBGap" id="auxBGap" class="form-control">
+                        <option value="32">32&Prime;</option>
+                        <option value="34">34&Prime;</option>
+                        <option value="36">36&Prime;</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div id="MortiseLockInputs" class="hide inputs-container">
+                  <div class="form-group row">
+                    <label for="mortiseRGap" class="col-sm-4 col-form-label"
+                      >Right gap</label
+                    >
+                    <div class="col-sm-8">
+                      <select
+                        name="mortiseRGap"
+                        id="mortiseRGap"
+                        class="form-control"
+                      >
+                        <option value=".5">0.5&Prime;</option>
+                        <option value="1">1.0&Prime;</option>
+                        <option value="1.5">1.5&Prime;</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="mortiseBGap" class="col-sm-4 col-form-label"
+                      >Bottom gap</label
+                    >
+                    <div class="col-sm-8">
+                      <select
+                        name="mortiseBGap"
+                        id="mortiseBGap"
+                        class="form-control"
+                      >
+                        <option value="32">32&Prime;</option>
+                        <option value="34">34&Prime;</option>
+                        <option value="36">36&Prime;</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="col-sm-4">
+                  <button class="btn btn-primary" id="resetForm">Reset</button>
+                </div>
+              </div>
+            </form>
+          </aside>
+          <main class="col-sm-9">
+            <div id="product"></div>
+          </main>
         </div>
-        <script src="./js/two.min.js"></script>
-        <script src="./xml.js"></script>
-        <script src="./js/utils.js"></script>
-        <script src="./js/source.js"></script>
-        <script src="./js/DOT.xml" type="text/xml"></script>
-    </body>
+      </div>
+    </div>
+    <script src="./js/two.min.js"></script>
+    <script src="./xml.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/source.js"></script>
+    <script src="./js/DOT.xml" type="text/xml"></script>
+  </body>
 </html>
