@@ -865,7 +865,7 @@ let DrawMortiseLock = () => {
   // bottom gap will be consider as top gap where top gap = doorHeight - bGap;
   const tGap = doorHeight - bGap;
 
-  const { basebar, baseX, baseY } = drawMortiseBaseBar({
+  const { baseBar, baseX, baseY } = drawMortiseBaseBar({
     baseWidth,
     baseHeight,
     doorWidth,
@@ -881,7 +881,7 @@ let DrawMortiseLock = () => {
   });
   const mHandle = drawMortiseHandle({ lgCircleY, baseWidth, baseX });
 
-  const mortiseLock = two.makeGroup(basebar, mCircles, mHandle);
+  const mortiseLock = two.makeGroup(baseBar, mCircles, mHandle);
 
   two.update();
 };
@@ -1053,9 +1053,6 @@ function hideInputContainers() {
 function removeHardwareLock() {
   if (document.querySelector("#product svg g g")) {
     document.querySelector("#product svg g g").remove();
-  }
-  if (document.getElementById("two_2")) {
-    document.getElementById("two_2").remove();
   }
 }
 
