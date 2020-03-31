@@ -13,6 +13,7 @@ let doorArea = null;
 
 let onSubmit = event => {
   event.preventDefault();
+
   let doorType = document.forms.doorLock["door-type"].value;
   let doorWidth = document.forms.doorLock["dWidth"].value;
   let doorHeight = document.forms.doorLock["dHeight"].value;
@@ -301,8 +302,6 @@ let render2PADoor = ({ doorHeight, doorWidth }) => {
     height = 700;
   let newWidth = doorWidth,
     newHeight = doorHeight;
-  // let newWidth = 100, newHeight = 100;
-  // var two = new Two({ width, height }).appendTo(domElement);
   let xratio = 1;
   let yratio = 1;
   let x1, x2, x3, x4, x5, x6, y1, y2, y3, y4, y5, y6;
@@ -719,7 +718,7 @@ let addHardware = event => {
   }
 
   // remove previously drawn lock shape
-  removeHardwareLock();
+  removeShapes({ selector: "#product svg g g" });
 
   let hardware_type = document.getElementById("selectHW").value;
 
@@ -755,13 +754,6 @@ function validateLock() {
       isValid = false;
     }
   }
-
-  return { message, isValid };
-}
-
-function validateSurfaceLockInputs() {
-  let message = "";
-  let isValid = true;
 
   return { message, isValid };
 }
@@ -808,15 +800,13 @@ function drawRImExitDevice() {
   });
 
   // draw wings
-  const {
-    wingGrp,
-    lowerWing,
-    wingX2,
-    wingX5,
-    wingWidth,
-    wingY2,
-    wingY4
-  } = drawWings({ tGap, rimX, rimWidth, rimHeight, exitDeviceWidth });
+  const { wingGrp, wingX2, wingWidth, wingY2, wingY4 } = drawWings({
+    tGap,
+    rimX,
+    rimWidth,
+    rimHeight,
+    exitDeviceWidth
+  });
 
   const rimExitDevice = two.makeGroup(smBarGrp, hrRim, wingGrp);
 
@@ -849,7 +839,7 @@ function drawSmVertBars({ exitDeviceWidth, tGap, lGap }) {
 let DrawAuxiliaryLock = () => {
   const { width: doorWidth, height: doorHeight } = doorArea; // instead of reading calculated door width, get it from the rendered door
 
-  const auxLock = drawAuxiliaryLock({ doorWidth, doorHeight });
+  drawAuxiliaryLock({ doorWidth, doorHeight });
 };
 
 let DrawMortiseLock = () => {
@@ -881,7 +871,7 @@ let DrawMortiseLock = () => {
   });
   const mHandle = drawMortiseHandle({ lgCircleY, baseWidth, baseX });
 
-  const mortiseLock = two.makeGroup(baseBar, mCircles, mHandle);
+  two.makeGroup(baseBar, mCircles, mHandle);
 
   two.update();
 };
@@ -918,7 +908,7 @@ let SurfaceVerticalRod = () => {
     supY
   });
 
-  const surfaceVertRod = two.makeGroup(rimExitDevice, uRodGrp, lRodGrp);
+  two.makeGroup(rimExitDevice, uRodGrp, lRodGrp);
 
   two.update();
 };
@@ -1004,7 +994,7 @@ function resetForm(e) {
 
 function clearDiagrams() {
   clearShapes();
-  removeShapes();
+  removeShapes({ selector: "#product svg" });
 }
 
 function clearShapes() {
@@ -1013,9 +1003,9 @@ function clearShapes() {
   }
 }
 
-function removeShapes() {
-  if (document.querySelector("#product svg")) {
-    document.querySelector("#product svg").remove();
+function removeShapes({ selector }) {
+  if (document.querySelector(selector)) {
+    document.querySelector(selector).remove();
   }
 }
 
@@ -1030,12 +1020,6 @@ function hideInputContainers() {
     document
       .querySelector(".inputsContainer .inputs-container:not(.hide)")
       .classList.add("hide");
-  }
-}
-
-function removeHardwareLock() {
-  if (document.querySelector("#product svg g g")) {
-    document.querySelector("#product svg g g").remove();
   }
 }
 
