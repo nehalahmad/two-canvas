@@ -981,32 +981,15 @@ function handleDoorTypeChangeHandler(e) {
   e.preventDefault();
 
   // TODO: clear the entire shape
+  hideInputContainers();
 
   if (e.target.value) {
-    hideInputContainers();
     document.getElementById("selectHW").value = "";
-
-    // fill the width, height of the door as per selected door fac
-    /*
-      let doorWidth = 0;
-      let doorHeight = 0;
-      switch(e.target.value) {
-        case 'F':
-          doorWidth = 19.5;
-          doorHeight = 42;
-          break;
-        case '2PA':
-          doorWidth = 36;
-          doorHeight = 84;
-          break;
-      }
-
-      document.forms.doorLock.dWidth.value = doorWidth;
-      document.forms.doorLock.dHeight.value = doorHeight;
-      */
   } else {
     document.getElementById("dWidth").value = "";
     document.getElementById("dHeight").value = "";
+    document.getElementById("selectHW").value = "";
+    clearDiagrams();
   }
 }
 
@@ -1063,43 +1046,6 @@ function handeLockChangeHandler(e) {
   hideInputContainers();
   if (document.getElementById(`${e.target.value}Inputs`)) {
     document.getElementById(`${e.target.value}Inputs`).classList.remove("hide");
-  }
-
-  const doorType = document.forms.doorLock["door-type"].value;
-  const doorWidth = Number(document.forms.doorLock.dWidth.value);
-  const doorHeight = Number(document.forms.doorLock.dHeight.value);
-
-  let lPos = 0;
-  let tPos = 0;
-
-  if (e.target.value) {
-    switch (e.target.value) {
-      case "RimExitDevice":
-        tPos = 23.5;
-        lPos = 1.0;
-        break;
-      case "AuxiliaryLock":
-        if (doorType === "2PA") {
-          tPos = Math.round(doorHeight * 0.28);
-          lPos = Math.round(doorWidth * 0.48);
-        } else if (doorType === "F") {
-          tPos = Math.round(doorHeight * 0.6);
-          lPos = Math.round(doorWidth * 0.9);
-        }
-
-        break;
-      case "SurfaceVerticalRod":
-        if (doorType === "F") {
-          tPos = Math.round(doorHeight * 0.48);
-          lPos = 1.0;
-        } else if (doorType === "2PA") {
-          tPos = Math.round(doorHeight * 0.279);
-          lPos = 1.0;
-        }
-        break;
-    }
-  } else {
-    document.getElementById("gapBar").classList.add("hide");
   }
 }
 
