@@ -718,7 +718,7 @@ let addHardware = event => {
   }
 
   // remove previously drawn lock shape
-  removeShapes({ selector: "#product svg g g" });
+  removeShapes({ selector: "#product svg g g" }); // CSS selector for lock shape group
 
   let hardware_type = document.getElementById("selectHW").value;
 
@@ -780,10 +780,12 @@ function drawRImExitDevice() {
   bGap = convertInchesIntoPix(bGap.value);
   // since, canvas is 2D
   // bottom gap will be consider as top gap where top gap = doorHeight - bGap;
-  const tGap = doorHeight - bGap;
 
   const exitDeviceWidth = doorWidth - lGap - rGap; // after margin
-  const { smBarGrp, smBarWidth, smBarHeight } = drawSmVertBars({
+  const rimDeviceHeight = Math.round(exitDeviceWidth * 0.1126); // 11.26% of exit device width
+  const tGap = doorHeight - bGap;
+
+  const { smBarGrp, smBarWidth } = drawSmVertBars({
     exitDeviceWidth,
     tGap,
     lGap
@@ -810,7 +812,6 @@ function drawRImExitDevice() {
 
   const rimExitDevice = two.makeGroup(smBarGrp, hrRim, wingGrp);
 
-  two.update();
   return { rimExitDevice, wingX2, wingWidth, wingY2, wingY4, exitDeviceWidth };
 }
 
@@ -833,7 +834,7 @@ function drawSmVertBars({ exitDeviceWidth, tGap, lGap }) {
   const smBarGrp = two.makeGroup(firstSmBar, secSmBar);
 
   two.update();
-  return { smBarGrp, smBarWidth: width, smBarHeight: height };
+  return { smBarGrp, smBarWidth: width };
 }
 
 let DrawAuxiliaryLock = () => {
@@ -853,7 +854,7 @@ let DrawMortiseLock = () => {
   const baseHeight = Math.round(baseWidth * 2.5054);
   // since, canvas is 2D
   // bottom gap will be consider as top gap where top gap = doorHeight - bGap;
-  const tGap = doorHeight - bGap;
+  const tGap = doorHeight - bGap - baseHeight / 2;
 
   const { baseBar, baseX, baseY } = drawMortiseBaseBar({
     baseWidth,

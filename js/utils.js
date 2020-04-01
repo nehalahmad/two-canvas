@@ -107,8 +107,6 @@ function drawUpperRod({
 
   const uRodGrp = two.makeGroup(upperRod, upperBarSup);
 
-  two.update();
-
   return { uRodGrp, uRodX1: x1, uRodX3: x3, supWidth, supHeight, supX, supY };
 }
 
@@ -129,8 +127,6 @@ function drawUpperBarSup({ uRodX1, uRodWidth, uRodHeight, doorWidth }) {
   const radius = Math.round(w * 0.2);
 
   const upperBarSup = two.makeRoundedRectangle(x, y, w, h, radius);
-
-  two.update();
 
   return { upperBarSup, supWidth: w, supHeight: h, supX: x, supY: y };
 }
@@ -169,8 +165,6 @@ function drawLowerRod({
 
   const lRodGrp = two.makeGroup(lowerRod, lowerBarSup);
 
-  two.update();
-
   return { lRodGrp };
 }
 
@@ -184,8 +178,6 @@ function drawLowerBarSup({ supWidth, supHeight, supX, doorHeight, supY }) {
   const radius = Math.round(w * 0.2);
 
   const lowerBarSup = two.makeRoundedRectangle(x, y, w, h, radius);
-
-  two.update();
 
   return lowerBarSup;
 }
@@ -235,7 +227,6 @@ function drawMortiseBaseBar({ baseWidth, baseHeight, doorWidth, tGap, rGap }) {
     baseHeight,
     baseRadius
   );
-  two.update();
 
   return { baseBar, baseX, baseY };
 }
@@ -253,7 +244,6 @@ function drawMortiseCircles({ baseX, baseY, baseWidth, baseHeight }) {
   const lgCircle = two.makeCircle(lgCircleX, lgCircleY, lgCircleRadius);
 
   const mCircles = two.makeGroup(smCircle, lgCircle);
-  two.update();
 
   return { mCircles, lgCircleY };
 }
@@ -273,7 +263,6 @@ function drawMortiseHandle({ lgCircleY, baseWidth, baseX }) {
     handleHeight,
     handleRadius
   );
-  two.update();
 
   return handle;
 }
